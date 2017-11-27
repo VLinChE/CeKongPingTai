@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--{% load staticfiles %}-->
+    <title>Bus Test</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!--<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>-->
+    <!--<script src="{% static 'js/Chart.bundle.js' %}"></script>-->
+    <!--<script src="{% static 'js/utils.js' %}"></script>-->
+<!--{#    <script src="../static/js/jquery-3.2.1.min.js"></script>#}-->
+<!--{#    <script src="../static/js/Chart.bundle.js"></script>#}-->
+<!--{#    <script src="../static/js/utils.js"></script>#}-->
+<!--{#    <script type="text/javascript">//<![CDATA[#}-->
+<!--{##}-->
+<!--{#    //]]></script>#}-->
+    <script src="../js/jquery.js"></script>
+    <script src="../js/Chart.bundle.js"></script>
+    <script src="../js/utils.js"></script>
+</head>
+<body>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">数据分析</a></li>
+    </ul>
+</div>
+<h2>FC总线参数配置</h2>
+<form action="ParamConfig" method="get">
+    <input type="text" name="Parameter">
+    <input type="text" name="Parameter">
+    <input type="text" name="Parameter">
+    <input type="submit" value="Configure">
+    <p>{{ recv }}</p>
+</form>
+<h2>数据回传</h2>
+<div id='messageContainer'>
+
+</div>
+
+<div style="width:75%;">
+    <canvas id="canvas"></canvas>
+</div>
+<button id="randomizeData">Randomize Data</button>
+<script>
+    $(function () {
+        if (window.s) {
+            window.s.close()
+        }
+        /*创建socket连接*/
+        var socket = new WebSocket("ws://" + window.location.host + "/bustest/");
+        socket.onopen = function () {
+            console.log('WebSocket open');//成功连接上Websocket
+        };
+        socket.onmessage = function (e) {
+            console.log('message: ' + e.data);//打印出服务端返回过来的数据
+            setMessageInnerHTML(e.data);
+        };
+
+        function setMessageInnerHTML(innerHTML) {
+            document.getElementById('messageContainer').innerHTML = innerHTML + '<br/>'
+            lineChartData.datasets.forEach(function (dataset) {
+            dataset.data = dataset.data.map(function () {
+                return randomScalingFactor();
+            });
+
+        });
+            window.myLine.update();
+        }
+
+        // Call onopen directly if socket is already open
+        if (socket.readyState == WebSocket.OPEN) socket.onopen();
+        window.s = socket;
+
+    });
+    　function f1(){
+        var n = 0;
+        nAdd=function(){
+            if(n < 750){
+                n+=1;
+            }else {
+                n = 1;
+            }
+        };
+        function f2(){
+            return n ;
+        }
+        return f2;
+    }
+    var datalist = [];
+    var result=f1();
+    setInterval(function () {
+        datalist[0] = result();
+        nAdd();
+        datalist[1] = datalist[0] + 1;
+        datalist[2] = datalist[1] + 1;
+        datalist[3] = datalist[2] + 1;
+        datalist[4] = datalist[3] + 1;
+        datalist[5] = datalist[4] + 1;
+        datalist[6] = datalist[5] + 1;
+    },1000);
+
+
+
+
+
+
+
+    var lineChartData = {
+        labels: datalist,
+        datasets: [{
+            label: "My First dataset",
+            borderColor: window.chartColors.red,
+            backgroundColor: window.chartColors.red,
+            fill: false,
+            data: [
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor()
+            ],
+            yAxisID: "y-axis-1",
+        }, {
+            label: "My Second dataset",
+            borderColor: window.chartColors.blue,
+            backgroundColor: window.chartColors.blue,
+            fill: false,
+            data: [
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor()
+            ],
+            yAxisID: "y-axis-2"
+        }]
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myLine = Chart.Line(ctx, {
+            data: lineChartData,
+            options: {
+                responsive: true,
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart - Multi Axis'
+                },
+                scales: {
+                    yAxes: [{
+                        type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                        display: true,
+                        position: "left",
+                        id: "y-axis-1",
+
+                        ticks: {
+                            min: -100,
+                            max: 100,
+                            stepSize: 10
+                        }
+                    }, {
+                        type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                        display: true,
+                        position: "right",
+                        id: "y-axis-2",
+
+                        ticks: {
+                            min: -100,
+                            max: 100,
+                            stepSize: 10
+                        }
+                    }],
+                }
+            }
+        });
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function () {
+        lineChartData.datasets.forEach(function (dataset) {
+            dataset.data = dataset.data.map(function () {
+                return randomScalingFactor();
+            });
+        });
+
+        window.myLine.update();
+    });
+</script>
+
+
+</body>
+</html>

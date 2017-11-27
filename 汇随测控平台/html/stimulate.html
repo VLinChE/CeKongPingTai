@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>静态激励</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">ICD管理</a></li>
+        <li><a href="#">静态激励</a></li>
+    </ul>
+</div>
+
+<!--修改按钮-->
+<div style="height: 10px;width: 100%"></div>
+<div class="tools">
+    <ul class="toolbar">
+        <li class="click"><span><img src="../images/t01.png" /></span>添加</li>
+        <li class="click"><span><img src="../images/t02.png" /></span>修改</li>
+        <li class="click"><span><img src="../images/t03.png" /></span>删除</li>
+    </ul>
+</div>
+
+<!--提示信息-->
+<div class="tip">
+    <div class="tiptop"><span>提示信息</span><a></a></div>
+
+    <div class="tipinfo">
+        <span><img src="../images/ticon.png" /></span>
+        <div class="tipright">
+            <p>是否确认对信息的修改 ？</p>
+            <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+    </div>
+
+    <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+    </div>
+
+</div>
+
+<!--消息列表-->
+<div class="message">
+    <span>消息列表</span>
+    <table class="tabA">
+        <thead>
+            <th colspan="2">消息名</th>
+            <th>描述信息</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">总线类型1553</td>
+            </tr>
+            <tr>
+                <td width="5%"></td>
+                <td colspan="2">消息类型：A//O</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>1</td>
+                <td>14:44:44</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>A//O_1</td>
+                <td>test</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>A//O_b4779fd0...</td>
+                <td>14:51:18</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>A//O_b477dfhs...</td>
+                <td>12344</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>A//O_b4779fd0...</td>
+                <td>14:41:05</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>ssssss</td>
+                <td>14:43:04</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>ssssss</td>
+                <td>ssssss</td>
+            </tr>
+            <tr>
+                <td width="5%"></td>
+                <td colspan="2">消息类型A2_00</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>A2_00//0001</td>
+                <td>无</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>A2_00_2</td>
+                <td>test</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>A2_00_edf340...</td>
+                <td>123</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--激励列表-->
+<div class="stimulate">
+    <span>激励列表</span>
+    <table class="tabA">
+        <thead>
+            <th>Message Name</th>
+            <th>ICD Type</th>
+            <th>Bus Type</th>
+            <th>Device Name</th>
+            <th>Stimulus T</th>
+            <th>Stimulus C</th>
+            <th>Stimulus N</th>
+            <th>Stimulus Status</th>
+        </thead>
+        <tbody>
+        <tr class="check">
+            <td>A//0_1</td>
+            <td>A//0</td>
+            <td>1553</td>
+            <td></td>
+            <td>事件</td>
+            <td>0</td>
+            <td>0</td>
+            <td>等待发送</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="stimula">
+        <div class="stimu">
+            <div class="late">
+                <div>
+                    <label for="">消息名</label>
+                    <input type="text" class="scinput" value="A//0_1" disabled>
+                </div>
+                <div>
+                    <label for="">ICD类型</label>
+                    <input type="text" class="scinput" value="A//0" disabled>
+                </div>
+                <div>
+                    <label for="">总线类型</label>
+                    <input type="text" class="scinput" value="1553" disabled>
+                </div>
+                <div>
+                    <label for="">设备名</label>
+                    <select name="" id="" class="scinput">
+                        <option value="">1553_1</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">激励类型</label>
+                    <select name="" id="" class="scinput">
+                        <option value="">事件</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">激励周期</label>
+                    <input type="text" class="scinput" value="0">
+                </div>
+                <div>
+                    <label for="">激励次数</label>
+                    <input type="text" class="scinput" value="10">
+                </div>
+                <div>
+                    <label for="">激励状态</label>
+                    <input type="text" class="scinput" value="等待发送" disabled>
+                </div>
+
+            </div>
+            <div class="late">
+                <div>
+                    <label for="">消息类型</label>
+                    <select name="" id="" class="scinput">
+                        <option value="">BC-RT</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">RT(0-31)</label>
+                    <input type="text" class="scinput" value="0">
+                </div>
+                <div>
+                    <label for="">TR</label>
+                    <select name="" id="" class="scinput">
+                        <option value="">R</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">SA(0-31)</label>
+                    <input type="text" class="scinput" value="0">
+                </div>
+                <div>
+                    <label for="">Bus</label>
+                    <select name="" id="" class="scinput">
+                        <option value="">BUSA</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Delay Time</label>
+                    <input type="text" class="scinput" value="0">
+                </div>
+                <div>
+                    &nbsp;
+                </div>
+                <div>
+                    <input name="" type="button" class="scbtn saveMas" value="保存消息"/>
+                </div>
+            </div>
+            <div style="position: relative">
+                <div class="massageTab">
+                    <table class="tabA">
+                        <thead>
+                        <th width="10%"></th>
+                        <th>信号内容</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input name="" type="checkbox" value=""/></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td><input name="" type="checkbox" value=""/></td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td><input name="" type="checkbox" value=""/></td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td><input name="" type="checkbox" value=""/></td>
+                            <td>34</td>
+                        </tr>
+                        <tr>
+                            <td><input name="" type="checkbox" value=""  checked/></td>
+                            <td>e2</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btnA">
+                    <input name="" type="button" class="scbtn addMas" value="添加信号"/>
+                    <input name="" type="button" class="scbtn deleteMas" value="删除选中"/>
+                </div>
+                <div class="addInput">
+                    <input type="text" class="scinput addInp">
+                    <input name="" type="button" class="scbtn addBtn" value="添加"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>
+<script src="../js/jquery.js"></script>
+<script>
+    $(document).ready(function(){
+
+        $(".click").click(function(){
+            $(".tip").fadeIn(200);
+        });
+
+        $(".tiptop a").click(function(){
+            $(".tip").fadeOut(200);
+        });
+
+        $(".sure").click(function(){
+            $(".tip").fadeOut(100);
+        });
+
+        $(".cancel").click(function(){
+            $(".tip").fadeOut(100);
+        });
+
+        $(".addMas").click(function () {
+            $(".addInput").slideToggle("slow");
+        });
+
+        $('.addBtn').click(function () {
+            var NewVal = $('.addInp').val();
+            var NewTr = '<tr> <td><input type="checkbox"/></td> <td>'+ NewVal +'</td> </tr>';
+            $('.massageTab tbody').append(NewTr)
+        });
+
+        $(".deleteMas").click(function() {
+            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                $(".massageTab tbody").find("tr:eq("+n+")").remove();
+            });
+        });
+
+        $('.check').click(function () {
+            $('.stimula').slideDown("fast")
+        });
+
+        $('.saveMas').click(function () {
+            $('.stimula').slideUp("fast")
+        })
+
+
+
+    });
+</script>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body style="background-color: #f7f4e9">
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">用户管理</a></li>
+        </ul>
+    </div>
+
+    <!--提示信息-->
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+
+        <div class="tipinfo">
+            <span><img src="../images/ticon.png" /></span>
+            <div class="tipright">
+                <p class="rowT"></p>
+                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
+        </div>
+
+        <div class="tipbtn">
+            <input name="" type="button"  class="sure" value="确定" />&nbsp;
+            <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    </div>
+    <div class="alert">
+        <div class="model-head">
+            <span class="close">&times;</span>
+        </div>
+    </div>
+    <!--正文-->
+    <div class="content">
+        <div class="flex">
+            <div >
+                <label for="user">用户名:</label>
+                <input type="text" class="scinput" id="user">
+            </div>
+            <div>
+                <label for="pass">密码:</label>
+                <input type="text" class="scinput" id="pass">
+            </div>
+            <div>
+                <label >身份:</label>
+                <select name="" id="ID" class="scinput">
+                    <option value="管理员">管理员</option>
+                    <option value="操作员">操作员</option>
+                    <option value="游客">游客</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex" style="width: 900px">
+            <div class="grid_3">
+                <label for="check1">权限1</label>
+                <input type="checkbox" name="check1" id="check1">
+            </div>
+            <div class="grid_3">
+                <label for="check2">权限2</label>
+                <input type="checkbox" name="check1" id="check2">
+            </div>
+            <div class="grid_3">
+                <label for="check3">权限3</label>
+                <input type="checkbox" name="check1" id="check3">
+            </div>
+            <div class="grid_3">
+                <label for="check4">权限4</label>
+                <input type="checkbox" name="check1" id="check4">
+            </div>
+            <div class="grid_3">
+                <label for="check5">权限5</label>
+                <input type="checkbox" name="check1" id="check5">
+            </div>
+        </div>
+        <div style="position: absolute;right: 20px;top: 100px">
+            <input name="" type="button" class="scbtn" value="保存"/>
+        </div>
+        <div >
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>密码</th>
+                    <th>身份</th>
+                    <th colspan="2" width="20%">操作</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <td colspan="5" class="pagination">
+                        <span class="active curved">1</span><a href="#" class="curved">2</a><a href="#" class="curved">3</a><a href="#" class="curved">4</a> ... <a href="#" class="curved">10 </a>
+                    </td>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr id="option1">
+                    <td>Thomas</td>
+                    <td>Philip</td>
+                    <td>Marketing</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(1)">删除</a></td>
+                </tr>
+                <tr id="option2">
+                    <td>Ben</td>
+                    <td>Thomas</td>
+                    <td>Marketing</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(2)">删除</a></td>
+                </tr>
+                <tr id="option3">
+                    <td>Richard</td>
+                    <td>Ben</td>
+                    <td>Development</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(3)">删除</a></td>
+                </tr>
+                <tr id="option4">
+                    <td>Alon</td>
+                    <td>Richard</td>
+                    <td>Development</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(4)">删除</a></td>
+                </tr>
+                <tr id="option5">
+                    <td>Alex</td>
+                    <td>Alon</td>
+                    <td>IT</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(5)">删除</a></td>
+                </tr>
+                <tr id="option6">
+                    <td>Claire</td>
+                    <td>Ed</td>
+                    <td>Development</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(6)">删除</a></td>
+                </tr>
+                <tr id="option7">
+                    <td>Philip</td>
+                    <td>Tom</td>
+                    <td>Development</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(7)">删除</a></td>
+                </tr>
+                <tr id="option8">
+                    <td>Thomas</td>
+                    <td>Claire</td>
+                    <td>Marketing</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(8)">删除</a></td>
+                </tr>
+                <tr id="option9">
+                    <td>Ben</td>
+                    <td>Thomas</td>
+                    <td>Marketing</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(9)">删除</a></td>
+                </tr>
+                <tr id="option10">
+                    <td>Philip</td>
+                    <td>Claire</td>
+                    <td>Development</td>
+                    <td><a href="#" class="edit">编辑</a></td>
+                    <td><a href="#" class="delete" onclick="sendRow(10)">删除</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>
+<script src="../js/jquery-1.11.1.min.js"></script>
+<script>
+    $(function () {
+
+        $(".tiptop a").click(function(){
+            $(".tip").fadeOut(200);
+        });
+        $('.edit').click(function () {
+            $('.alert').show()
+        });
+        $('.close').click(function () {
+            $('.alert').hide()
+        })
+
+        $(".cancel").click(function(){
+            $(".tip").fadeOut(100);
+        });
+        var rowCount=10;  //行数默认4行
+        //删除行
+        sendRow = function (index) {
+            $(".tip").fadeIn(200);
+            $('.rowT').html("是否删除此用户？");
+            console.log(index);
+            $(".sure").click(function(){
+                $(".tip").fadeOut(100);
+                $("#option"+index).remove();
+            });
+    }
+        //添加行
+        $('.scbtn').click(function () {
+            var user = $("#user").val();
+            var pass = $("#pass").val();
+            var id = $("#ID").val();
+            rowCount++;
+            if (user == ""){
+                $(".tip").fadeIn(200);
+                $('.rowT').html("不能为空！");
+                $(".sure").click(function () {
+                    $(".tip").fadeOut(100);
+                })
+            }else {
+                var newRow='<tr id="option'+rowCount+'"> <td>'+user+'</td><td>'+pass+'</td><td>'+id+'</td><td><a href="#" class="edit">编辑</a></td> <td><a href="#" class="delete" onclick="sendRow('+rowCount+')">删除</a></td></tr>';
+                $('.table tbody').append(newRow);
+            }
+        })
+
+
+    })
+</script>

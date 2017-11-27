@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en"  ng-app="myApp">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>ICD管理</title>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<!--<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">-->
+	<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	<!--<link rel="stylesheet" href="../css/com.css">-->
+	<!--<link rel="stylesheet" href="css/style.css">-->
+
+	<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<!--<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>-->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+<div class="place">
+	<span>位置：</span>
+	<ul class="placeul">
+		<li><a href="#">首页</a></li>
+		<li><a href="#">数据分析</a></li>
+	</ul>
+</div>
+
+
+
+<div>
+	<ul class="nav nav-pills" id="myTab">
+		<li class="active">
+			<a href="#ADF" data-toggle="tab">ADF</a>
+		</li>
+		<li>
+			<a href="#TACAN" data-toggle="tab">TACAN</a>
+		</li>
+		<li>
+			<a href="#ILS" data-toggle="tab">ILS</a>
+		</li>
+		<li>
+			<a href="#MLS" data-toggle="tab">MLS</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<!--1-->
+		<div class="tab-pane active" id="ADF" ng-controller="ADFCtr">
+			<div class="content">
+				<!--ADF波形ICD-->
+				<div class="demo1">
+					<p class="bg-success">ADF波形ICD</p>
+					<div class="cont" style="height: 70%">
+						<form id="AdfSend" class="form-horizontal">
+							<br>
+							<div class="form-group">
+								<label for="AdfFrequency" class="col-sm-4 control-label">ADF工作频率</label>
+								<div class="col-sm-3">
+									<input type="number" name="AdfFrequency" ng-model="data.AdfFrequency" class="form-control" id="AdfFrequency" value="150.0" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="AdfAngle"class="col-sm-4 control-label">ADF台站方位角</label>
+								<div class="col-sm-3">
+									<select  name="AdfAngle" ng-model="data.AdfAngle"  class="form-control" id="AdfAngle">
+										<option value="0°">0°</option>
+										<option value="45°">45°</option>
+										<option value="90°">90°</option>
+										<option value="135°">135°</option>
+										<option value="180°">180°</option>
+										<option value="225°">225°</option>
+										<option value="270°">270°</option>
+										<option value="315°">315°</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="AdfSignalRange" class="col-sm-4 control-label">激励源信号幅度</label>
+								<div class="col-sm-3">
+									<input type="number" name="AdfSignalRange" ng-model="data.AdfSignalRange" class="form-control" id="AdfSignalRange" value="2.0" />
+								</div>
+								<div class="col-sm-3">
+									<select name="AdfUnits" ng-model="data.AdfUnits" class="form-control">
+										<option value="uv">uv</option>
+										<option value="mv">mv</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="AdfStatus" class="col-sm-4 control-label">识别模式</label>
+								<div class="col-sm-3">
+									<select name="AdfStatus" ng-model="data.AdfStatus" class="form-control" id="AdfStatus">
+										<option value="close">关闭</option>
+										<option value="normal">正常</option>
+										<option value="discern">识别</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="AdfMode" class="col-sm-4 control-label">工作模式</label>
+								<div class="col-sm-3">
+									<select name="AdfMode" ng-model="data.AdfMode" class="form-control" id="AdfMode">
+										<option value="local">本地</option>
+										<option value="long">远程</option>
+									</select>
+								</div>
+							</div>
+							<br><br>
+							<div class="form-actions">
+								<div class="col-sm-4 control-label">发送ADF</div>
+								<button type="button" class="btn btn-info col-sm-3" ng-click="submitForm()">发送</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!--ADF返回信息-->
+				<div class="demo2">
+					<p class="bg-info">ADF返回信息</p>
+					<div class="cont" style="height: 70%">
+						<form class="form-horizontal">
+							<br>
+							<div class="form-group">
+								<label for="AdfFrequency1" class="col-sm-4 control-label">ADF工作频率</label>
+								<div class="col-sm-3">
+									<input type="text" name="AdfFrequency" class="form-control" id="AdfFrequency1" value="150.0" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="AdfAngle1" class="col-sm-4 control-label">ADF台站方位角</label>
+								<div class="col-sm-3">
+									<input type="text" name="AdfAngle" class="form-control" id="AdfAngle1" value="0°">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="AdfSignalRange1" class="col-sm-4 control-label">激励源信号幅度</label>
+								<div class="col-sm-3">
+									<input type="number" name="AdfSignalRange" class="form-control" id="AdfSignalRange1" value="2.0" />
+								</div>
+								<div class="col-sm-3">
+									<input type="text" name="AdfUnits" class="form-control" value="mv">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="AdfStatus1" class="col-sm-4 control-label">识别模式</label>
+								<div class="col-sm-3">
+									<input type="text" name="AdfStatus" class="form-control" id="AdfStatus1">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="AdfMode1" class="col-sm-4 control-label">工作模式</label>
+								<div class="col-sm-3">
+									<input type="text" name="AdfMode" class="form-control" id="AdfMode1">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 2 -->
+		<div class="tab-pane" id="TACAN" ng-controller="TACANCtr">
+			<div class="content">
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="ExciterMode">激励器工作模式？</label>
+						<select class="form-control" id="ExciterMode" name="ExciterMode">
+							<option value="Kong-Di">空/地工作模式</option>
+							<option value="Kong-Kong">空/空工作模式</option>
+							<option value="DEM-P">DEM/P工作模式</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="WayMode">远程or本地？</label>
+						<select class="form-control" id="WayMode" name="WayMode">
+							<option value="local">本地</option>
+							<option value="long">远程</option>
+						</select>
+					</div>
+				</form>
+				<div class="tabbable" style="margin: 3px;">
+					<ul class="nav nav-pills" id="divstyletab">
+						<li class="active">
+							<a href="#tab21" data-toggle="tab">空/地工作模式</a>
+						</li>
+						<li>
+							<a href="#tab22" data-toggle="tab">空/空工作模式</a>
+						</li>
+						<li>
+							<a href="#tab23" data-toggle="tab">DEM/P工作模式</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<!-- 第一个tab -->
+						<div class="tab-pane fade active in" id="tab21">
+							<div class="demo1">
+								<p class="bg-success">TACAN空/空模式</p>
+								<div class="cont" style="height: 100%">
+									<form class="form-horizontal" id="KongSend">
+										<br>
+										<div class="form-group">
+											<label for="KongDistance" class="col-sm-2 control-label">距离</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongDistance" class="form-control" id="KongDistance" value="1000.0" />
+											</div>
+											<label for="KongState" class="col-sm-2 control-label">状态</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongState" class="form-control" id="KongState" value="0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongDistanceSpeed" class="col-sm-2 control-label">距离速率</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongDistanceSpeed" class="form-control" id="KongDistanceSpeed" value="2000.0" />
+											</div>
+											<label for="KongOrientation" class="col-sm-2 control-label">方位</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongOrientation" class="form-control" id="KongOrientation" value="3500.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="Kong15HzModulation" class="col-sm-2 control-label">15Hz调制度</label>
+											<div class="col-sm-3">
+												<input type="number" name="Kong15HzModulation" class="form-control" id="Kong15HzModulation" value="39" />
+											</div>
+											<label for="KongOrientationSpeed" class="col-sm-2 control-label">方位速率</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongOrientationSpeed" class="form-control" id="KongOrientationSpeed" value="-39" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="Kong15HzShifting" class="col-sm-2 control-label">15Hz相移</label>
+											<div class="col-sm-3">
+												<input type="number" name="Kong15HzShifting" class="form-control" id="Kong15HzShifting" value="39" />
+											</div>
+											<label for="Kong135HzModulation" class="col-sm-2 control-label">135Hz调制度</label>
+											<div class="col-sm-3">
+												<input type="number" name="Kong135HzModulation" class="form-control" id="Kong135HzModulation" value="35" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongMainBenchmarkGroup" class="col-sm-2 control-label">主基准群</label>
+											<div class="col-sm-3">
+												<select name="KongMainBenchmarkGroup" class="form-control" id="KongMainBenchmarkGroup">
+													<option value="open">开</option>
+													<option value="close">关</option>
+												</select>
+											</div>
+											<label for="KongPulseSeparation" class="col-sm-2 control-label">脉冲间隔</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongPulseSeparation" class="form-control" id="KongPulseSeparation" value="390.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongAssistBenchmarkGroup" class="col-sm-2 control-label">辅基准群</label>
+											<div class="col-sm-3">
+												<select name="KongAssistBenchmarkGroup" class="form-control" id="KongAssistBenchmarkGroup">
+													<option value="open">开</option>
+													<option value="close">关</option>
+												</select>
+											</div>
+											<label for="KongResponse" class="col-sm-2 control-label">回答概率</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongResponse" class="form-control" id="KongResponse" value="80" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongWorkMode" class="col-sm-2 control-label">工作模式</label>
+											<div class="col-sm-3">
+												<select name="KongWorkMode" class="form-control" id="KongWorkMode">
+													<option value="X">X模式</option>
+													<option value="Y">Y模式</option>
+												</select>
+											</div>
+											<label for="KongRandomFillPulse" class="col-sm-2 control-label">随机填充脉冲</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongRandomFillPulse" class="form-control" id="KongRandomFillPulse" value="8000" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongRFOutgoing" class="col-sm-2 control-label">RF输出电平</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongRFOutgoing" class="form-control" id="KongRFOutgoing" value="127" />
+											</div>
+											<label for="KongWorkChannel" class="col-sm-2 control-label">工作波道</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongWorkChannel" class="form-control" id="KongWorkChannel" value="120" />
+											</div>
+										</div>
+										<br>
+										<div class="form-actions">
+											<div class="col-sm-4 control-label">发送TACAN</div>
+											<button type="button" class="btn btn-info col-sm-3" onclick="submitForm()">发送</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="demo2">
+								<p class="bg-info">返回信息</p>
+								<div class="cont" style="height: 100%;">
+									<form class="form-horizontal" id="">
+										<br>
+										<div class="form-group">
+											<label for="KongDistance1" class="col-sm-2 control-label">距离</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongDistance" class="form-control" id="KongDistance1" value="1000.0" />
+											</div>
+											<label for="KongState1" class="col-sm-2 control-label">状态</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongState" class="form-control" id="KongState1" value="0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongDistanceSpeed1" class="col-sm-2 control-label">距离速率</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongDistanceSpeed" class="form-control" id="KongDistanceSpeed1" value="2000.0" />
+											</div>
+											<label for="KongOrientation1" class="col-sm-2 control-label">方位</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongOrientation" class="form-control" id="KongOrientation1" value="3500.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="Kong15HzModulation1" class="col-sm-2 control-label">15Hz调制度</label>
+											<div class="col-sm-3">
+												<input type="number" name="Kong15HzModulation" class="form-control" id="Kong15HzModulation1" value="39" />
+											</div>
+											<label for="KongOrientationSpeed1" class="col-sm-2 control-label">方位速率</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongOrientationSpeed" class="form-control" id="KongOrientationSpeed1" value="-39" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="Kong15HzShifting1" class="col-sm-2 control-label">15Hz相移</label>
+											<div class="col-sm-3">
+												<input type="number" name="Kong15HzShifting" class="form-control" id="Kong15HzShifting1" value="39" />
+											</div>
+											<label for="Kong135HzModulation1" class="col-sm-2 control-label">135Hz调制度</label>
+											<div class="col-sm-3">
+												<input type="number" name="Kong135HzModulation" class="form-control" id="Kong135HzModulation1" value="35" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongMainBenchmarkGroup1" class="col-sm-2 control-label">主基准群</label>
+											<div class="col-sm-3">
+												<input type="text" name="KongMainBenchmarkGroup" class="form-control" id="KongMainBenchmarkGroup1">
+											</div>
+											<label for="KongPulseSeparation1" class="col-sm-2 control-label">脉冲间隔</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongPulseSeparation" class="form-control" id="KongPulseSeparation1" value="390.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongAssistBenchmarkGroup1" class="col-sm-2 control-label">辅基准群</label>
+											<div class="col-sm-3">
+												<input type="text" name="KongAssistBenchmarkGroup" class="form-control" id="KongAssistBenchmarkGroup1">
+											</div>
+											<label for="KongResponse1" class="col-sm-2 control-label">回答概率</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongResponse" class="form-control" id="KongResponse1" value="80" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongWorkMode1" class="col-sm-2 control-label">工作模式</label>
+											<div class="col-sm-3">
+												<input type="text" name="KongWorkMode" class="form-control" id="KongWorkMode1">
+											</div>
+											<label for="KongRandomFillPulse1" class="col-sm-2 control-label">随机填充脉冲</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongRandomFillPulse" class="form-control" id="KongRandomFillPulse1" value="8000" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongRFOutgoing1" class="col-sm-2 control-label">RF输出电平</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongRFOutgoing" class="form-control" id="KongRFOutgoing1" value="127" />
+											</div>
+											<label for="KongWorkChannel1" class="col-sm-2 control-label">工作波道</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongWorkChannel" class="form-control" id="KongWorkChannel1" value="120" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="KongPeakPower" class="col-sm-2 control-label">峰值功率</label>
+											<div class="col-sm-3">
+												<input type="number" name="KongPeakPower" class="form-control" id="KongPeakPower" value="127" />
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- 第二个tab -->
+						<div class="tab-pane fade" id="tab22">
+							<div class="demo1" >
+								<p class="bg-success">TACAN空/地模式</p>
+								<div class="cont" style="height:95%;">
+									<form class="form-horizontal" id="DiSend">
+										<br>
+										<div class="form-group">
+											<label for="DiDistance" class="col-sm-2 control-label">距离</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiDistance" class="form-control" id="DiDistance" value="1000.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiDistanceSpeed" class="col-sm-2 control-label">距离速率</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiDistanceSpeed" class="form-control" id="DiDistanceSpeed" value="2000.0" />
+											</div>
+											<label for="DiOrientation" class="col-sm-2 control-label">方位</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiOrientation" class="form-control" id="DiOrientation" value="3500.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="Di15HzModulation" class="col-sm-2 control-label">15Hz调制度</label>
+											<div class="col-sm-3">
+												<input type="number" name="Di15HzModulation" class="form-control" id="Di15HzModulation" value="39" />
+											</div>
+											<label for="DiOrientationSpeed" class="col-sm-2 control-label">方位速率</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiOrientationSpeed" class="form-control" id="DiOrientationSpeed" value="-39" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiMainBenchmarkGroup" class="col-sm-2 control-label">主基准群</label>
+											<div class="col-sm-3">
+												<select name="DiMainBenchmarkGroup" class="form-control" id="DiMainBenchmarkGroup">
+													<option value="open">开</option>
+													<option value="close">关</option>
+												</select>
+											</div>
+											<label for="DiPulseSeparation" class="col-sm-2 control-label">脉冲间隔</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiPulseSeparation" class="form-control" id="DiPulseSeparation" value="390.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiAskRate" class="col-sm-2 control-label">空/空询问率 </label>
+											<div class="col-sm-3">
+												<input type="text" name="DiAskRate" class="form-control" id="DiAskRate">
+											</div>
+											<label for="DiResponse" class="col-sm-2 control-label">回答概率</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiResponse" class="form-control" id="DiResponse" value="80" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiWorkMode" class="col-sm-2 control-label">工作模式</label>
+											<div class="col-sm-3">
+												<select name="DiWorkMode" class="form-control" id="DiWorkMode">
+													<option value="X">X模式</option>
+													<option value="Y">Y模式</option>
+												</select>
+											</div>
+											<label for="DiRandomFillPulse" class="col-sm-2 control-label">随机填充脉冲</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiRandomFillPulse" class="form-control" id="DiRandomFillPulse" value="8000" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiRFOutgoing" class="col-sm-2 control-label">RF输出电平</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiRFOutgoing" class="form-control" id="DiRFOutgoing" value="127" />
+											</div>
+											<label for="DiWorkChannel" class="col-sm-2 control-label">工作波道</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiWorkChannel" class="form-control" id="DiWorkChannel" value="120" />
+											</div>
+										</div>
+										<br>
+										<div class="form-actions">
+											<div class="col-sm-4 control-label">发送TACAN</div>
+											<button type="button" class="btn btn-info col-sm-3" onclick="submitForm()">发送</button>
+										</div>
+
+
+									</form>
+								</div>
+							</div>
+							<div class="demo2">
+								<p class="bg-info">返回信息</p>
+								<div class="cont" style="height: 95%">
+									<form class="form-horizontal" id="">
+										<br>
+										<div class="form-group">
+											<label for="DiDistance1" class="col-sm-2 control-label">距离</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiDistance" class="form-control" id="DiDistance1" value="1000.0" />
+											</div>
+											<label for="DiPeakPower" class="col-sm-2 control-label">峰值功率</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiPeakPower" class="form-control" id="DiPeakPower" value="0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiDistanceSpeed1" class="col-sm-2 control-label">距离速率</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiDistanceSpeed" class="form-control" id="DiDistanceSpeed1" value="2000.0" />
+											</div>
+											<label for="DiOrientation1" class="col-sm-2 control-label">方位</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiOrientation" class="form-control" id="DiOrientation1" value="3500.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="Di15HzModulation1" class="col-sm-2 control-label">15Hz调制度</label>
+											<div class="col-sm-3">
+												<input type="number" name="Di15HzModulation" class="form-control" id="Di15HzModulation1" value="39" />
+											</div>
+											<label for="DiOrientationSpeed1" class="col-sm-2 control-label">方位速率</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiOrientationSpeed" class="form-control" id="DiOrientationSpeed1" value="-39" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiMainBenchmarkGroup1" class="col-sm-2 control-label">主基准群</label>
+											<div class="col-sm-3">
+												<input type="text" name="DiMainBenchmarkGroup" class="form-control" id="DiMainBenchmarkGroup1">
+											</div>
+											<label for="DiPulseSeparation1" class="col-sm-2 control-label">脉冲间隔</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiPulseSeparation" class="form-control" id="DiPulseSeparation1" value="390.0" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiAskRate1" class="col-sm-2 control-label">空/空询问率 </label>
+											<div class="col-sm-3">
+												<input type="text" name="DiAskRate" class="form-control" id="DiAskRate1">
+											</div>
+											<label for="DiResponse1" class="col-sm-2 control-label">回答概率</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiResponse" class="form-control" id="DiResponse1" value="80" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiWorkMode1" class="col-sm-2 control-label">工作模式</label>
+											<div class="col-sm-3">
+												<input type="text" name="DiWorkMode" class="form-control" id="DiWorkMode1">
+											</div>
+											<label for="DiRandomFillPulse1" class="col-sm-2 control-label">随机填充脉冲</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiRandomFillPulse" class="form-control" id="DiRandomFillPulse1" value="8000" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DiRFOutgoing1" class="col-sm-2 control-label">RF输出电平</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiRFOutgoing" class="form-control" id="DiRFOutgoing1" value="127" />
+											</div>
+											<label for="DiWorkChannel1" class="col-sm-2 control-label">工作波道</label>
+											<div class="col-sm-3">
+												<input type="number" name="DiWorkChannel" class="form-control" id="DiWorkChannel1" value="120" />
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- 第三个tab -->
+						<div class="tab-pane fade" id="tab23">
+							<div class="demo1" >
+								<p class="bg-success" style="width: 65%">TACAN DEM/P模式</p>
+								<div class="cont" style="height: 97%;width: 65%">
+									<form class="form-horizontal" id="DEMSend">
+										<br>
+										<div class="form-group">
+											<label for="DEMWorkMode" class="col-sm-4 control-label">工作模式</label>
+											<div class="col-sm-6">
+												<select name="DEMWorkMode" class="form-control" id="DEMWorkMode">
+													<option value="X">X模式</option>
+													<option value="Y">Y模式</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMDistance" class="col-sm-4 control-label">距离</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMDistance" class="form-control" id="DEMDistance" value="0.000">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMDistanceSpeed" class="col-sm-4 control-label">距离速率</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMDistanceSpeed" class="form-control" id="DEMDistanceSpeed" value="0.000">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMResponse" class="col-sm-4 control-label">回答概率</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMResponse" class="form-control" id="DEMResponse" value="0.000">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMRandomFillPulse" class="col-sm-4 control-label">随机填充脉冲</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMRandomFillPulse" class="form-control" id="DEMRandomFillPulse" value="700">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMPulseSeparation" class="col-sm-4 control-label">脉冲间隔</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMPulseSeparation" class="form-control" id="DEMPulseSeparation" value="390.0">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMWorkChannel" class="col-sm-4 control-label">工作坡道</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMWorkChannel" class="form-control" id="DEMWorkChannel" value="18">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMIaFaAuto" class="col-sm-4 control-label">IA/FA/AUTO</label>
+											<div class="col-sm-6">
+												<select name="DEMIaFaAuto" class="form-control" id="DEMIaFaAuto">
+													<option value="FA">FA</option>
+													<option value="IA">IA</option>
+													<option value="AUTO">AUTO</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMRFOutgoing" class="col-sm-4 control-label">RF输出电平</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMRFOutgoing" class="form-control" id="DEMRFOutgoing" value="125">
+											</div>
+										</div>
+										<br><br>
+										<div class="form-actions">
+											<div class="col-sm-4 control-label">发送TACAN</div>
+											<button type="button" class="btn btn-info col-sm-6" onclick="submitForm()">发送</button>
+										</div>
+									</form>
+
+								</div>
+							</div>
+							<div class="demo2">
+								<p class="bg-info" style="width: 65%">返回信息</p>
+								<div class="cont" style="height: 97%;width: 65%">
+									<form class="form-horizontal" id="">
+										<br>
+										<div class="form-group">
+											<label for="DEMWorkMode1" class="col-sm-4 control-label">工作模式</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMWorkMode" class="form-control" id="DEMWorkMode1">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMDistance1" class="col-sm-4 control-label">距离</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMDistance" class="form-control" id="DEMDistance1" value="0.000">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMDistanceSpeed1" class="col-sm-4 control-label">距离速率</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMDistanceSpeed" class="form-control" id="DEMDistanceSpeed1" value="0.000">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMResponse1" class="col-sm-4 control-label">回答概率</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMResponse" class="form-control" id="DEMResponse1" value="0.000">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMRandomFillPulse1" class="col-sm-4 control-label">随机填充脉冲</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMRandomFillPulse" class="form-control" id="DEMRandomFillPulse1" value="700">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMPulseSeparation1" class="col-sm-4 control-label">脉冲间隔</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMPulseSeparation" class="form-control" id="DEMPulseSeparation1" value="390.0">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMWorkChannel1" class="col-sm-4 control-label">工作坡道</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMWorkChannel" class="form-control" id="DEMWorkChannel1" value="18">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMIaFaAuto1" class="col-sm-4 control-label">IA/FA/AUTO</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMIaFaAuto" class="form-control" id="DEMIaFaAuto1">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMRFOutgoing1" class="col-sm-4 control-label">RF输出电平</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMRFOutgoing" class="form-control" id="DEMRFOutgoing1" value="125">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="DEMPeakPower" class="col-sm-4 control-label">峰值功率</label>
+											<div class="col-sm-6">
+												<input type="text" name="DEMPeakPower" class="form-control" id="DEMPeakPower" value="125">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+
+						</div>
+						<!-- 中间图表结束 -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 3 -->
+		<div class="tab-pane" id="ILS" ng-controller="ILSCtr">
+			<div class="content">
+				<div class="demo1">
+					<p class="bg-success" style="width: 65%">ILS</p>
+					<div class="cont" style="height: 70%;width: 65%">
+						<form id="ILSSend" class="form-horizontal">
+							<br>
+							<div class="form-group">
+								<label for="IlsModeSetting" class="col-sm-4 control-label">设置ILS模式</label>
+								<div class="col-sm-6">
+									<select name="IlsModeSetting" class="form-control" id="IlsModeSetting">
+										<option value="LOC">LOC</option>
+										<option value="GSL">GSL</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="IlsFrequency " class="col-sm-4 control-label">设置频率</label>
+								<div class="col-sm-6">
+									<input type="text" name="IlsFrequency" class="form-control" id="IlsFrequency" value="0.00000000">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="IlsGlideDDM " class="col-sm-4 control-label">设置下滑DDM</label>
+								<div class="col-sm-6">
+									<input type="text" name="IlsGlideDDM" class="form-control" id="IlsGlideDDM" value="0.000">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="IlsCourseDDM " class="col-sm-4 control-label">设置航向DDM</label>
+								<div class="col-sm-6">
+									<input type="text" name="IlsCourseDDM" class="form-control" id="IlsCourseDDM" value="0.000">
+								</div>
+							</div>
+							<br><br>
+							<div class="form-actions">
+								<div class="col-sm-4 control-label">发送ILS</div>
+								<button type="button" class="btn btn-info col-sm-6" onclick="submitForm()">发送</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="demo2">
+					<p class="bg-info" style="width: 65%">ILS返回信息</p>
+					<div class="cont" style="height: 70%;width: 65%">
+						<form id="" class="form-horizontal">
+							<br>
+							<div class="form-group">
+								<label for="IlsModeSetting1" class="col-sm-4 control-label">设置ILS模式</label>
+								<div class="col-sm-6">
+									<input type="text" name="IlsModeSetting" class="form-control" id="IlsModeSetting1" value="LOC">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="IlsFrequency1 " class="col-sm-4 control-label">设置频率</label>
+								<div class="col-sm-6">
+									<input type="text" name="IlsFrequency" class="form-control" id="IlsFrequency1" value="0.00000000">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="IlsGlideDDM1" class="col-sm-4 control-label">设置下滑DDM</label>
+								<div class="col-sm-6">
+									<input type="text" name="IlsGlideDDM" class="form-control" id="IlsGlideDDM1" value="0.000">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="IlsCourseDDM1" class="col-sm-4 control-label">设置航向DDM</label>
+								<div class="col-sm-6">
+									<input type="text" name="IlsCourseDDM" class="form-control" id="IlsCourseDDM1" value="0.000">
+								</div>
+							</div>
+							<br><br>
+							<div class="form-actions">
+								<div class="col-sm-4 control-label">发送ILS</div>
+								<button type="button" class="btn btn-info col-sm-6" onclick="submitForm()">发送</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 4 -->
+		<div class="tab-pane" id="MLS" ng-controller="MLSCtr">
+			<div class="content">
+				<div class="demo1">
+					<p class="bg-success">MLS</p>
+					<div class="cont" style="height:95%;">
+						<form id="MlsSend" class="form-horizontal">
+							<br>
+							<div class="form-group">
+								<label for="MLsIlsChannel" class="col-sm-2 control-label">ILS工作波道号</label>
+								<div class="col-sm-3">
+									<input type="number" name="MLsIlsChannel" class="form-control" id="MLsIlsChannel" value="500" />
+								</div>
+								<label for="MLsFrequencyRange" class="col-sm-2 control-label">射频幅度</label>
+								<div class="col-sm-3">
+									<input type="number" name="MLsFrequencyRange" class="form-control" id="MLsFrequencyRange" value="-17" />
+								</div>
+							</div>
+							<br>
+							<div class="form-actions">
+								<button type="button" class="btn btn-info col-sm-2 col-sm-offset-5" onclick="submitForm()">发送</button>
+							</div>
+
+							<div class="demo1" style="margin: 2% 2% 2% 2%;">
+								<p class="bg-success">俯仰角</p>
+								<div class="cont" style="height: 50%">
+									<br>
+									<div class="form-group">
+										<label for="MLsStateOfPitch" class="col-sm-5 control-label">选择俯仰角状态</label>
+										<div class="col-sm-5">
+											<select name="MLsStateOfPitch" class="form-control" id="MLsStateOfPitch">
+												<option value="ON">ON</option>
+												<option value="OFF">OFF</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsAngle" class="col-sm-5 control-label">角度</label>
+										<div class="col-sm-5">
+											<input type="number" name="MLsAngle" class="form-control" id="MLsAngle" value="0.00" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsLevelValue" class="col-sm-5 control-label">电平值</label>
+										<div class="col-sm-5">
+											<input type="number" name="MLsLevelValue" class="form-control" id="MLsLevelValue" value="0.00" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsPulseShape" class="col-sm-5 control-label">脉冲形状</label>
+										<div class="col-sm-5">
+											<select name="MLsPulseShape" class="form-control" id="MLsPulseShape">
+												<option value="NORM">NORM</option>
+												<option value="HALF">HALF</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsBeamWidth" class="col-sm-5 control-label">波束宽度</label>
+										<div class="col-sm-5">
+											<select name="MLsBeamWidth" class="form-control" id="MLsBeamWidth">
+												<option value="0.5">0.5</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="demo2" style="margin: 2% 2% 2% 2%;">
+								<p class="bg-info">方位角</p>
+								<div class="cont" style="height: 50%">
+									<br>
+									<div class="form-group">
+										<label for="MLsAzimuthState" class="col-sm-5 control-label">选择方位角状态</label>
+										<div class="col-sm-5">
+											<select name="MLsAzimuthState" class="form-control" id="MLsAzimuthState">
+												<option value="ON">ON</option>
+												<option value="OFF">OFF</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsAngleF" class="col-sm-5 control-label">角度</label>
+										<div class="col-sm-5">
+											<input type="number" name="MLsAngleF" class="form-control" id="MLsAngleF" value="0.00" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsLevelValueF" class="col-sm-5 control-label">电平值</label>
+										<div class="col-sm-5">
+											<input type="number" name="MLsLevelValueF" class="form-control" id="MLsLevelValueF" value="0.00" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsPulseShapeF" class="col-sm-5 control-label">脉冲形状</label>
+										<div class="col-sm-5">
+											<select name="MLsPulseShapeF" class="form-control" id="MLsPulseShapeF">
+												<option value="NORM">NORM</option>
+												<option value="HALF">HALF</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsBeamWidthF" class="col-sm-5 control-label">波束宽度</label>
+										<div class="col-sm-5">
+											<select name="MLsBeamWidthF" class="form-control" id="MLsBeamWidthF">
+												<option value="0.5">0.5</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</form>
+
+
+					</div>
+				</div>
+				<!--返回信息-->
+				<div class="demo2">
+					<p class="bg-info">MLS返回数据</p>
+					<div class="cont" style="height:95%;">
+						<form id="" class="form-horizontal">
+							<br>
+							<div class="form-group">
+								<label for="MLsIlsChannel1" class="col-sm-2 control-label">ILS工作波道号</label>
+								<div class="col-sm-3">
+									<input type="number" name="MLsIlsChannel" class="form-control" id="MLsIlsChannel1" value="500" />
+								</div>
+								<label for="MLsFrequencyRange1" class="col-sm-2 control-label">射频幅度</label>
+								<div class="col-sm-3">
+									<input type="number" name="MLsFrequencyRange" class="form-control" id="MLsFrequencyRange1" value="-17" />
+								</div>
+							</div>
+							<br>
+							<div class="demo1" style="margin: 8% 2% 2% 2%;">
+								<p class="bg-success">俯仰角</p>
+								<div class="cont" style="height: 50%">
+									<br>
+									<div class="form-group">
+										<label for="MLsStateOfPitch1" class="col-sm-5 control-label">选择俯仰角状态</label>
+										<div class="col-sm-5">
+											<input type="text" name="MLsStateOfPitch" class="form-control" id="MLsStateOfPitch1">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsAngle1" class="col-sm-5 control-label">角度</label>
+										<div class="col-sm-5">
+											<input type="number" name="MLsAngle" class="form-control" id="MLsAngle1" value="0.00" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsLevelValue1" class="col-sm-5 control-label">电平值</label>
+										<div class="col-sm-5">
+											<input type="number" name="MLsLevelValue" class="form-control" id="MLsLevelValue1" value="0.00" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsPulseShape1" class="col-sm-5 control-label">脉冲形状</label>
+										<div class="col-sm-5">
+											<input type="text" name="MLsPulseShape" class="form-control" id="MLsPulseShape1">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsBeamWidth1" class="col-sm-5 control-label">波束宽度</label>
+										<div class="col-sm-5">
+											<input type="text" name="MLsBeamWidth" class="form-control" id="MLsBeamWidth1">
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="demo2" style="margin: 8% 2% 2% 2%;">
+								<p class="bg-info">方位角</p>
+								<div class="cont" style="height: 50%">
+									<br>
+									<div class="form-group">
+										<label for="MLsAzimuthState1" class="col-sm-5 control-label">选择方位角状态</label>
+										<div class="col-sm-5">
+											<input type="text" name="MLsAzimuthState" class="form-control" id="MLsAzimuthState1">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsAngleF1" class="col-sm-5 control-label">角度</label>
+										<div class="col-sm-5">
+											<input type="number" name="MLsAngleF" class="form-control" id="MLsAngleF1" value="0.00" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsLevelValueF1" class="col-sm-5 control-label">电平值</label>
+										<div class="col-sm-5">
+											<input type="number" name="MLsLevelValueF" class="form-control" id="MLsLevelValueF1" value="0.00" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsPulseShapeF1" class="col-sm-5 control-label">脉冲形状</label>
+										<div class="col-sm-5">
+											<input type="text" name="MLsPulseShapeF" class="form-control" id="MLsPulseShapeF1">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="MLsBeamWidthF1" class="col-sm-5 control-label">波束宽度</label>
+										<div class="col-sm-5">
+											<input type="text" name="MLsBeamWidthF" class="form-control" id="MLsBeamWidthF1">
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</form>
+
+
+					</div>
+
+				</div>
+			</div>
+			<!-- tab end -->
+		</div>
+	</div>
+</div>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // 阻止 tab-pane的默认显示
+        $('#myTab a').click(function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+
+        });
+        $('#divstyletab a').click(function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+    });
+</script>
+<!--<script src="../js/angular.min.js"></script>-->
+<!--<script type="text/javascript" src="../js/app.js"></script>-->
+
+</html>

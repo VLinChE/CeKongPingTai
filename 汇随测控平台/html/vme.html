@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">分析评估</a></li>
+        <li><a href="#">任务编写</a></li>
+    </ul>
+</div>
+<div class="formbody">
+
+    <div class="formtitle"><span>测试任务编辑</span></div>
+
+    <ul class="forminfo">
+        <li><label>名称：</label><input name="" type="text" class="scinput" /><i>名称不能超过10个字符</i></li>
+        <li><label>创建者：</label><input name="" type="text" class="scinput" /></li>
+        <li><label>所属项目：</label><select name="" id="" class="scinput">
+            <option value="">ICD</option>
+            <option value="">ACN</option>
+            <option value="">TACAN</option>
+            <option value="">ILS</option>
+            <option value="">MLS</option>
+        </select></li>
+        <li><label>所属产品：</label><select name="" id="" class="scinput">
+            <option value="">ICD</option>
+            <option value="">ACN</option>
+            <option value="">TACAN</option>
+            <option value="">ILS</option>
+            <option value="">MLS</option>
+        </select></li>
+        <li><label>描述信息：</label><textarea name="" cols="" rows="" class="textinput"></textarea></li>
+    </ul>
+</div>
+
+<div class="vme">
+    <span>测试项列表</span>
+    <table cellpadding="0" cellspacing="0" id="optionContainer" class="tabA" >
+        <thead>
+            <tr id="option0">
+                <th width="28%">执行顺序</th>
+                <th width="46%">所属测试项</th>
+                <th width="28%">删除</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr id="option1">
+            <td>步骤1：</td>
+            <td>
+                <select name="" id="" class="dfinput">
+                    <option value="">必定通过的测试项</option>
+                    <option value="">延迟测试项</option>
+                    <option value="">发布消息测试</option>
+                    <option value="">必定失败测试项</option>
+                    <option value="">弹窗测试</option>
+                    <option value="">发送消息测试-自定义内容</option>
+                    <option value="">socket收发测试</option>
+                    <option value="">--------</option>
+                </select>
+            </td>
+            <td></td>
+        </tr>
+        <tr id="option2">
+            <td>步骤2：</td>
+            <td>
+                <select name="" id="" class="dfinput">
+                    <option value="">必定通过的测试项</option>
+                    <option value="">延迟测试项</option>
+                    <option value="">发布消息测试</option>
+                    <option value="">必定失败测试项</option>
+                    <option value="">弹窗测试</option>
+                    <option value="">发送消息测试-自定义内容</option>
+                    <option value="">socket收发测试</option>
+                    <option value="">--------</option>
+                </select>
+            </td>
+            <td></td>
+        </tr>
+        <tr id="option3">
+            <td>步骤3：</td>
+            <td>
+                <select name="" id="" class="dfinput">
+                    <option value="">必定通过的测试项</option>
+                    <option value="">延迟测试项</option>
+                    <option value="">发布消息测试</option>
+                    <option value="">必定失败测试项</option>
+                    <option value="">弹窗测试</option>
+                    <option value="">发送消息测试-自定义内容</option>
+                    <option value="">socket收发测试</option>
+                    <option value="">--------</option>
+                </select>
+            </td>
+            <td></td>
+        </tr>
+        <tr id="option4">
+            <td>步骤4：</td>
+            <td>
+                <select name="" id="" class="dfinput">
+                    <option value="">必定通过的测试项</option>
+                    <option value="">延迟测试项</option>
+                    <option value="">发布消息测试</option>
+                    <option value="">必定失败测试项</option>
+                    <option value="">弹窗测试</option>
+                    <option value="">发送消息测试-自定义内容</option>
+                    <option value="">socket收发测试</option>
+                    <option value="">--------</option>
+                </select>
+            </td>
+            <td onclick=delRow(4)>删除</td>
+        </tr>
+
+        </tbody>
+
+    </table>
+    <div>
+        <input name="" type="button" class="scbtn" value="添加一行" onclick="addRow()" style="margin-left: 28%"/>
+        <input  type="button" class="scbtn" value="运行测试" style="margin-left: 32%">
+    </div>
+</div>
+
+</body>
+</html>
+<script src="../js/jquery.js"></script>
+<script>
+    var rowCount=4;  //行数默认4行
+
+    //添加行
+    function addRow(){
+        rowCount++;
+        var newRow='<tr id="option'+rowCount+'"><td>步骤'+rowCount+'：</td><td><select name="" id="" class="dfinput"> <option value="">必定通过的测试项</option> <option value="">延迟测试项</option> <option value="">发布消息测试</option> <option value="">必定失败测试项</option> <option value="">弹窗测试</option> <option value="">发送消息测试-自定义内容</option> <option value="">socket收发测试</option> <option value="">--------</option> </select> </td><td><a href="#" onclick=delRow('+rowCount+')>删除</a></td></tr>';
+        $('#optionContainer').append(newRow);
+    }
+
+    //删除行
+    function delRow(rowIndex){
+        $("#option"+rowIndex).remove();
+        rowCount--;
+    }
+</script>
